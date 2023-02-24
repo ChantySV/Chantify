@@ -2,6 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+const verifyToken = require('../middlewires/verify_token')
+const signToken = require('../middlewires/sing_token')
+
+
 app.use(express.json());
 app.use(cors());
 
@@ -12,16 +16,16 @@ const artist = require('../config/artist')
 app.use('/artist', artist)
 
 const album = require('../config/album')
-app.use('/album', album)
+app.use('/album', verifyToken, album)
 
 const info_song = require('../config/info_song')
-app.use('/song', info_song)
+app.use('/song', verifyToken, info_song)
 
 const playlist = require('../config/playlist')
-app.use('/playlist', playlist)
+app.use('/playlist', verifyToken, playlist)
 
 const detail = require('../config/detail_playlist')
-app.use('/detail', detail)
+app.use('/detail', verifyToken, detail)
 
 
 const login = require('../config/login')

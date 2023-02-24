@@ -15,7 +15,7 @@ route.post("/", async function (req, res) {
     mail: req.body.mail,
     user_pass: req.body.user_pass,
   };
-  
+
   let sql = "Select user_pass from data_user where mail = ?";
   conexion.query(sql, req.body.mail, (err, resul) => {
     if (err) {
@@ -36,7 +36,15 @@ route.post("/", async function (req, res) {
             let passBD = resul[0].user_pass
             if (await encrypt.compare(req.body.user_pass, passBD)){                        
                   console.log('Tienes acceso');
-                  res.json('OK')                              
+                  res.json('OK')  
+                  jwt.sign(data, JWT_SECRET, function (err, token){
+                    if (err) {
+                        console.log('Error token');   
+                        console.log(err)                         
+                    } else {                            
+                       console.log(token);
+                    }
+                });                            
           } else {
                 console.log('Contraseña Incorrecta');
                 res.json('Error')

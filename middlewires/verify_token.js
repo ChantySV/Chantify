@@ -1,7 +1,6 @@
-const {JWT_SECRET} = require ('../Rutas/parametros.js')
+const {JWT_SECRET} = require ('../routes/parametros')
 
 const jwt = require ('jsonwebtoken');
-
 
 const verifyToken = (req, res, next) =>{
     let token = req.get('Authorization')
