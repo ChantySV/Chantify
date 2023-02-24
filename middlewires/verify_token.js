@@ -5,7 +5,8 @@ const jwt = require ('jsonwebtoken');
 const verifyToken = (req, res, next) =>{
     let token = req.get('Authorization')
     if (!token) {
-        console.log('Usuario no registrado');
+        console.log('Usuario no registrado'); 
+        res.json({mensaje:'Usuario inexistente'})
     } else {        
     jwt.verify(token, JWT_SECRET, (err) => {
         if(err) {
