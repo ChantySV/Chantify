@@ -58,22 +58,14 @@ route.post('/', (req, res) => {
             }
 
             let sql = 'Insert into data_user set ?';            
-            conexion.query(sql, data, function(err){
+            conexion.query(sql, data, function(err, resul){
                 if (err) {
                     console.log(err.mensaje);
-                    res.json({mensaje:'Error datos'});
-
+                    res.json({mensaje:'Error datos'});  
                 } else {
-                    jwt.sign(data, JWT_SECRET,function (errort, token){
-                        if (errort) {
-                            console.log('Error token');   
-                            console.log(token)                         
-                        } else {                            
-                            res.json(token)
-                        }
-                    })
-                    // res.json(resul)
-                }
+                    console.log('Se adiciono');
+                    res.json(resul)
+                }                    
             })            
         }
     });
