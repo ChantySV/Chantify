@@ -3,16 +3,16 @@ const {JWT_SECRET} = require ('../routes/parametros')
 const jwt = require ('jsonwebtoken');
 
 const verifyToken = (req, res, next) =>{
-    let token = req.get('Authorization')
+    let token = req.header('Authorization')
     if (!token) {
-        console.log('Usuario no registrado'); 
-        res.json({mensaje:'Usuario inexistente'})
+        console.log('Token no encontrado'); 
+        return res.status(400).json({mensaje:'Token no encontrado'})
     } else {        
     jwt.verify(token, JWT_SECRET, (err) => {
         if(err) {
             console.log("Error: Token invalido");            
             throw err
-        }else{        
+        }else{                                
             next()
         }
     });

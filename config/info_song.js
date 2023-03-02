@@ -45,10 +45,11 @@ route.post('/', (req, res) => {
 
             let data = {
                 ID_song: codigo,
+                name_song:req.body.name_song,
                 lyrics:req.body.lyrics,
                 melody:req.body.melody,
                 gender:req.body.gender,
-                URL:req.body.URL,
+                URL:req.body.link,
                 ID_album:req.body.ID_album
             }
             let sql = 'Insert into info_song set ?';
@@ -69,14 +70,15 @@ route.post('/', (req, res) => {
 route.put('/:code_song', (req,res) => {
 
     let code_song = req.params.code_song;
+    let name_song = req.params.name_song;
     let lyrics = req.body.lyrics;
     let melody = req.body.melody;
     let gender = req.body.gender;    
     let URL = req.body.URL;    
     let ID_album = req.body.ID_album;    
     
-    let sql = 'Update info_song set lyrics=?, melody=?, gender=?, URL=?, ID_album=? where ID_song = ?';
-    conexion.query(sql,[lyrics, melody, gender, URL, ID_album, code_song],function(err,resul){
+    let sql = 'Update info_song set name_song=? lyrics=?, melody=?, gender=?, URL=?, ID_album=? where ID_song = ?';
+    conexion.query(sql,[lyrics, name_song, melody, gender, URL, ID_album, code_song],function(err,resul){
         if(err){
             console.log(err.message);
         }else{
