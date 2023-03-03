@@ -9,29 +9,28 @@ app.use(express.json());
 app.use(cors());
 
 const profile = require('../config/data_user')
-app.use('/profile', verifyToken, profile)
+app.use('/profile', profile)
 
 const artist = require('../config/artist')
-app.use('/artist', verifyToken, artist)
+app.use('/artist', artist)
 
 const album = require('../config/album')
-app.use('/album', verifyToken, album)
+app.use('/album', album)
 
 const info_song = require('../config/info_song')
-app.use('/song', verifyToken, info_song)
+app.use('/song', info_song)
 
 const playlist = require('../config/playlist')
-app.use('/playlist', verifyToken, playlist)
+app.use('/playlist', playlist)
 
 const detail = require('../config/detail_playlist')
-app.use('/detail', verifyToken, detail)
-
-const detail = require('../config/detail_playlist')
-app.use('/detail', verifyToken, detail)
+app.use('/detail', detail)
 
 const login = require('../config/login')
 app.use('/login', login)
 
+const grafic = require('../config/grafic')
+app.use('/grafic', grafic)
 
 const puerto = 3000
 app.listen(puerto, function() {

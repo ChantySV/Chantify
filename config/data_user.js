@@ -124,7 +124,7 @@ route.put('/:code_user',async(req,res) => {
     let sql = 'Update data_user set name_user=?, last_name=?, user_pass=? where ID_user = ?';
     conexion.query(sql,[name_user, last_name, user_pass, code_user],function(err,resul){
         if(err){
-            console.log(err.message);
+            console.log(err);
         }else{
             res.json(resul);
             console.log('Positiva, se modifico');

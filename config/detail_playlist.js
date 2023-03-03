@@ -53,23 +53,23 @@ route.post('/', (req, res) => {
     });
 
 
-// route.put('/:code_playlist', (req,res) => {
+route.put('/:code_playlist', (req,res) => {
 
-//     let code_playlist = req.params.code_playlist;
+    let code_playlist = req.params.code_playlist;
 
-//     let name_playlist = req.body.name_playlist          
+    let name_playlist = req.body.name_playlist          
 
-//     let sql = 'Update detail_playlist set name_playlist=? where ID_playlist = ?';
+    let sql = 'Update detail_playlist set name_playlist=? where ID_playlist = ?';
 
-//     conexion.query(sql,[name_playlist, code_playlist],function(err,resul){
-//         if(err){
-//             console.log(err.message);
-//         }else{
-//             res.json(resul);
-//             console.log('Positiva, se modifico');
-//         }
-//     });
-// });
+    conexion.query(sql,[name_playlist, code_playlist],function(err,resul){
+        if(err){
+            console.log(err.message);
+        }else{
+            res.json(resul);
+            console.log('Positiva, se modifico');
+        }
+    });
+});
 
 
 
