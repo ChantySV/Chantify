@@ -2,8 +2,21 @@ const conexion = require('./database')
 
 const express = require('express');
 const cors = require('cors');
+const multer = require('multer');
 
 const route = express.Router()
+
+
+const storage = multer.diskStorage({
+    destination: '../uploads/audio',
+    filename: function (req, file, cb) {
+        cb(null, file.originalname + Date.now() + '.mp3')
+    }
+})
+
+const upload = multer({
+   storage: storage
+})
 
 
 route.get('/',(req, res) => { 
@@ -31,8 +44,9 @@ route.get('/:code_song',(req, res) => {
     });
 });
 
-route.post('/', (req, res) => {   
-    
+route.post('/song', upload.single('song'), (req, res) => {   
+       const song = req.file
+       const ubicacion = song.path
     sql = 'Select IFNULL(MAX(ID_song), 0)+1 valor from info_song;'
     let codigo = 0
     conexion.query(sql,(err, dato) =>{
@@ -41,19 +55,14 @@ route.post('/', (req, res) => {
             return -1;
         } else {            
             codigo=dato[0].valor
-            console.log('Codigo maximo',codigo);           
-
-            let data = {
-                ID_song: codigo,
-                name_song:req.body.name_song,
-                lyrics:req.body.lyrics,
-                melody:req.body.melody,
-                gender:req.body.gender,
-                URL:req.body.link,
-                ID_album:req.body.ID_album
-            }
-            let sql = 'Insert into info_song set ?';
-            conexion.query(sql,data, function(err,resul){
+            console.log('Codigo maximo',codigo);                
+            let name_song = req.body.name_song;
+            let lyrics = req.body.lyrics;
+            let melody = req.body.melody;
+            let gender = req.body.gender;                   
+            let ID_album = req.body.ID_album;                             
+            let sql = 'Insert into info_song (ID_song, name_song, lyrics, melody, gender, URL, ID_album) values(?, ?, ?, ?, ?, ?, ?)';
+            conexion.query(sql,[codigo, name_song, lyrics, melody, gender, ubicacion ,ID_album], function(err,resul){
                 if(err){
                     console.log(err.message);
                     res.json({ mensaje:'Error no se adiciono'});
