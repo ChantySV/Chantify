@@ -31,6 +31,17 @@ route.get('/',(req, res) => {
     });
 });
 
+route.get('/song',(req, res) => { 
+    let sql = "SELECT name_song, URL, ID_album FROM info_song"
+    conexion.query(sql, (err, resul) => {
+        if(err) {
+            console.log("Error: "+ err.message);
+            throw err
+        }else{
+            res.json(resul)                      
+        }
+    });
+});
 
 route.get('/:code_song',(req, res) => { 
     let sql = "SELECT * FROM album where ID_song = ?"

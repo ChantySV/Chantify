@@ -46,7 +46,7 @@ route.post('/', (req, res) => {
             let data = {
                 ID_playlist: codigo,
                 name_playlist:req.body.name_playlist,
-                ID_user:req.body.ID_user
+                ID_user:global.ID_USER
             }
             
             let sql = 'Insert into playlist set ?';

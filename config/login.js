@@ -20,7 +20,7 @@ route.post("/", async function (req, res) {
   conexion.query(sql, req.body.mail, (err, resul) => {
     if (err) {
       res.json("ERROR");
-      console.log('usuario error');
+      console.log('Error correo');
     } 
     else {
       conexion.query(sql, req.body.mail, async function (err, resul) {
@@ -35,12 +35,14 @@ route.post("/", async function (req, res) {
                         console.log('Error token');   
                         console.log(err)   
                         res.json(token);                      
-                    } else {                            
-                      console.log(token);
-                      res.json({token:token});
-                      res.status(200).json({token:token})                                             
-                    }
-                    
+                    } else {                                
+                      let sql2 = "select ID_user from data_user where mail = ?"                       
+                      conexion.query(sql2, data.mail, (err, resul)=>{
+                        global.ID_USER = resul[0].ID_user                                                 
+                      })                                                          
+                      res.json({token:token});                      
+                      res.status(200).json({token:token})                                                                   
+                    }                    
                 });                            
           } else {
                 console.log('Contraseña Incorrecta');
