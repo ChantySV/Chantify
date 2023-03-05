@@ -8,7 +8,7 @@ const route = express.Router()
 
 
 const storage = multer.diskStorage({
-    destination: '../uploads/audio',
+    destination: '../public/uploads/audio',
     filename: function (req, file, cb) {
         cb(null, file.originalname + Date.now() + '.mp3')
     }
@@ -26,19 +26,23 @@ route.get('/',(req, res) => {
             console.log("Error: "+ err.message);
             throw err
         }else{
-            res.json(resul)                      
+            res.json(resul)                             
         }
     });
 });
 
 route.get('/song',(req, res) => { 
-    let sql = "SELECT name_song, URL, ID_album FROM info_song"
+    let sql = "SELECT name_song, URL FROM info_song"
     conexion.query(sql, (err, resul) => {
         if(err) {
             console.log("Error: "+ err.message);
             throw err
         }else{
-            res.json(resul)                      
+            resul.forEach(valor => {                
+                valor.URL = "/public/uploads/audio/" + valor.URL
+            });                      
+            //console.log(resul);
+            res.json(resul)
         }
     });
 });
@@ -57,7 +61,7 @@ route.get('/:code_song',(req, res) => {
 
 route.post('/song', upload.single('song'), (req, res) => {   
        const song = req.file
-       const ubicacion = song.path
+       const ubicacion = song.filename
     sql = 'Select IFNULL(MAX(ID_song), 0)+1 valor from info_song;'
     let codigo = 0
     conexion.query(sql,(err, dato) =>{
@@ -79,7 +83,7 @@ route.post('/song', upload.single('song'), (req, res) => {
                     res.json({ mensaje:'Error no se adiciono'});
                     throw res.json(err.message)
                 }else{
-                    res.json(resul);
+                                     
                     console.log('Positiva, se adiciono');
                 }
             });
