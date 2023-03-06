@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;500;700&display=swap');
+*{
+    text-decoration: none;
+    font-family: 'Hind', sans-serif;
+}
+body{
+    background: #000 ;
+    color: #fff;
+    text-decoration: none;
+}
+header{
+	display: flex;
+	flex-direction:row;
+	align-items: center;
+	height: 70px;
+    box-sizing: content-box;
+	background-color: #FF5D00;
+    margin: 0 auto;
+    padding: 10px;	
+	justify-content: space-around;
+}
+
+nav{
+	display: flex;
+	
+	
+    width: 100%;
+	box-sizing: content-box;	
+}
+nav a{
+	color: #fff;	
+	padding: 30px 30px;
+	border-radius:25px;
+    font-size: 20px;
+}
+header img {
+	max-width: 140px;
+}

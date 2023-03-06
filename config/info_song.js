@@ -31,33 +31,17 @@ route.get('/',(req, res) => {
     });
 });
 
-route.get('/song',(req, res) => { 
-    let sql = "SELECT name_song, URL FROM info_song"
-    conexion.query(sql, (err, resul) => {
-        if(err) {
-            console.log("Error: "+ err.message);
-            throw err
-        }else{
-            resul.forEach(valor => {                
-                valor.URL = "/public/uploads/audio/" + valor.URL
-            });                      
-            //console.log(resul);
-            res.json(resul)
-        }
-    });
-});
-
-route.get('/:code_song',(req, res) => { 
-    let sql = "SELECT * FROM album where ID_song = ?"
-    conexion.query(sql,[req.params.code_song], (err, resul) => {
-        if(err) {
-            console.log("Error: "+ err.message);
-            throw err
-        }else{
-            res.json(resul)                      
-        }
-    });
-});
+// route.get('/:code_song',(req, res) => { 
+//     let sql = "SELECT * FROM album where ID_song = ?"
+//     conexion.query(sql,[req.params.code_song], (err, resul) => {
+//         if(err) {
+//             console.log("Error: "+ err.message);
+//             throw err
+//         }else{
+//             res.json(resul)                      
+//         }
+//     });
+// });
 
 route.post('/song', upload.single('song'), (req, res) => {   
        const song = req.file

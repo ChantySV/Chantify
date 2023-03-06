@@ -18,11 +18,36 @@ route.get('/',(req, res) => {
     });
 });
 
+route.get('/playlistUser',(req, res) => { 
+    let sql = "select name_playlist from playlist where ID_user = ?"
+    conexion.query(sql, global.ID_USER, (err, resul) => {
+        if(err) {
+            console.log("Error: "+ err.message);
+            throw err
+        }else{
+            res.json(resul)  
+            console.log(resul);                    
+        }
+    });
+});
 
 route.get('/:code_playlist',(req, res) => { 
     let sql = "SELECT * FROM playlist where ID_playlist = ?"
 
     conexion.query(sql,[req.params.code_playlist], (err, resul) => {
+        if(err) {
+            console.log("Error: "+ err.message);
+            throw err
+        }else{
+            res.json(resul)                      
+        }
+    });
+});
+//GET PLAYLIST DEL USUARIO
+route.get('/playlistUser',(req, res) => { 
+    let sql = "SELECT ID_playlist, name_playlist FROM playlist where ID_user = ?"
+
+    conexion.query(sql, global.ID_user , (err, resul) => {
         if(err) {
             console.log("Error: "+ err.message);
             throw err

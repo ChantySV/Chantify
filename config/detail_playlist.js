@@ -19,15 +19,18 @@ route.get('/',(req, res) => {
 });
 
 
-route.get('/playlist/:code_playlist',(req, res) => { 
-    let sql = "SELECT * FROM detail_playlist where ID_playlist = ?"
-
-    conexion.query(sql,[req.params.code_playlist], (err, resul) => {
+route.get('/detail_playlist',(req, res) => { 
+    let sql = "SELECT info_song.name_song, info_song.URL, album.name_album, detail_playlist.ID_playlist FROM info_song inner join album on info_song.ID_album = album.ID_album inner join detail_playlist on info_song.ID_song = detail_playlist.ID_song  where ID_playlist  = ?"
+    conexion.query(sql, global.ID_USER, (err, resul) => {
         if(err) {
             console.log("Error: "+ err.message);
             throw err
         }else{
-            res.json(resul)                      
+            resul.forEach(valor => {                
+                valor.URL = "/public/uploads/audio/" + valor.URL
+            });                      
+            //console.log(resul);
+            res.json(resul)
         }
     });
 });

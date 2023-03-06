@@ -1,0 +1,61 @@
+.contenedor-config{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    width: 30%;
+}
+a{
+    color: #f4f4f4;
+}
+
+.contenedor-general{
+    display: flex;
+    justify-content: space-between;    
+}
+/* MENU LATERAL */
+.contenedor-izquierda{
+    width: 20%;    
+    box-sizing: content-box;
+}
+.contenedor-config{
+    width: 100%;
+    padding: 30px; 
+    border-bottom: 3px solid #555555;   
+}
+.contenedor-config a{
+    text-align: center;
+    padding: 10px;
+   
+}
+.contenedor-playlist {
+    margin-top: 10px;
+    padding: 30px;
+	height: 400px;
+	width: 100%;
+	border: 1px solid #ddd;
+	overflow-y: scroll;
+    text-align: center;
+    border: none;    
+}
+.mensajes {
+	height: auto;    
+}
+.texto {
+	padding:4px;
+	background:#000;
+}
+
+/* Muestra de canciones */
+.contenedor-derecha{
+    width: 80%;  
+    text-align: right;
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 150px;
+}
+.contenedor-derecha audio{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    
+}
