@@ -1,19 +1,19 @@
 
 //MOSTRAR PLAYLIST
-const contenedorPlaylist = document.getElementById('contenedor-playlist')
+const contenedorPlaylist = document.getElementById('canciones')
 let resultadoPlaylist = ''
 const cargaPlaylist = (datos)=>{
     datos.forEach(dato => {
         resultadoPlaylist += 
-        `<p>
+        `<a>
             ${dato.name_playlist}
-        </p>`
+        </a>`
     })
     contenedorPlaylist.innerHTML = resultadoPlaylist
 }
    
 axios.get('http://localhost:3000/playlist/playlistUser') 
-    .then(response =>  console.log(response.data)) 
+    .then(response =>  cargaPlaylist(response.data)) 
     .catch(err => console.log(err)); 
 
 // //MOSTRAR CANCIONES
