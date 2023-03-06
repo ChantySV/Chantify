@@ -48,7 +48,8 @@ route.post("/", async function (req, res) {
                           if (resul2.length == 0) {
                             res.json({token:token});                                                  
                           } else {
-                            res.json(link);                                                  
+                            res.json(link);     
+                            global.ID_ARTIST = resul2[0].ID_artist                                         
                           }                           
                         })  
                       })
