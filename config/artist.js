@@ -47,7 +47,7 @@ route.post('/', (req, res) => {
             let data = {
                 ID_artist: codigo,
                 nickname:req.body.nickname,
-                ID_user:req.body.ID_user
+                ID_user:global.ID_user
             }
             
             let sql = 'Insert into artist set ?';

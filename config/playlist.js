@@ -25,7 +25,8 @@ route.get('/playlistUser',(req, res) => {
             console.log("Error: "+ err.message);
             throw err
         }else{
-            res.json(resul)                               
+            res.json(resul)  
+            //console.log(resul);                    
         }
     });
 });

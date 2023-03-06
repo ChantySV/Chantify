@@ -1,15 +1,18 @@
-const url = 'http://localhost:3000/artist' 
+const on = (element, event, selector, handler) => {
+    element.addEventListener(event, e =>{
+        if(e.target.closest(selector)){
+            handler(e)
+        }
+    });
+} 
 
-formartist.addEventListener("submit", (e) => {
+formArtist.addEventListener("submit", (e) => {
     e.preventDefault()
-    fetch(url, {
-        method: "POST",
-        headers: {"Content-type":"application/json"},
-        body: JSON.stringify({        
-            nickname:nickname.value,
-            ID_user:ID_user.value
-        })
-    })
-    .then(response => response.json())
-    .then(data => { console.log(data);})
-});
+    axios.post('http://localhost:3000/artist', { 
+        nickname:nickname.value,        
+    })          
+    .then(response => { console.log(response.data)
+        alert('Felicidades ahora eres artista :D')
+    })             
+    .catch(err => console.log(err));
+})    

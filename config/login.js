@@ -38,10 +38,21 @@ route.post("/", async function (req, res) {
                     } else {                                
                       let sql2 = "select ID_user from data_user where mail = ?"                       
                       conexion.query(sql2, data.mail, (err, resul)=>{
-                        global.ID_USER = resul[0].ID_user                                                 
-                      })                                                          
-                      res.json({token:token});                      
-                      res.status(200).json({token:token})                                                                   
+                        global.ID_USER = resul[0].ID_user                     
+                        let sql3 = "select ID_artist from artist where ID_user = ?"
+                        conexion.query(sql3,  global.ID_USER, (err, resul2)=>{
+                          let link = {                        
+                            link: './mainArtist.html',
+                            token:token
+                          }
+                          if (resul2.length == 0) {
+                            res.json({token:token});                                                  
+                          } else {
+                            res.json(link);                                                  
+                          }                           
+                        })  
+                      })
+                                                                                                                                                            
                     }                    
                 });                            
           } else {

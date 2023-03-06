@@ -71,58 +71,16 @@ route.post('/', (req, res) => {
     });
 });
 
-
-// route.post('/', (req, res) => {    
-//     sql = 'Select IFNULL(MAX(ID_user), 0)+1 valor from data_user;'
-//     let codigo = 0
-
-//     conexion.query(sql, async (err, dato) =>{
-//         if (err) {
-//             console.log("Error");            
-//         } else {            
-//             codigo=dato[0].valor
-//             console.log('Codigo maximo', codigo);
-//             let pass_encrip = await encrypt.hash(req.body.user_pass, 10)
-
-//             let data = {
-//                 ID_user: codigo,
-//                 name_user:req.body.name_user,
-//                 last_name:req.body.last_name,
-//                 mail:req.body.mail,
-//                 user_pass:pass_encrip
-//             }
-
-//             let sql = 'Insert into data_user set ?';            
-//             conexion.query(sql, data, function(err, resul){
-//                 if (err) {
-//                     console.log(mensaje);
-//                     res.json({mensaje:'gei santy'});
-//                 } else {
-//                     jwt.sign(data, JWT_SECRET,function (errort, token){
-//                         if (errort) {
-//                             console.log('Error token');                            
-//                         } else {                            
-//                             res.json(token)
-//                         }
-//                     })
-//                     // res.json(resul)
-//                 }
-//             })            
-//         }
-//     });
-// });
-
-route.put('/:code_user',async(req,res) => {
+route.put('/s',async(req,res) => {
 
     let pass_encrip = await encrypt.hash(req.body.user_pass, 10)
 
-    let code_user = req.params.code_user;
+    let code_user = global.ID_USER;
     let name_user = req.body.name_user;
-    let last_name = req.body.last_name;
-    let user_pass = pass_encrip;
+    let last_name = req.body.last_name;    
 
-    let sql = 'Update data_user set name_user=?, last_name=?, user_pass=? where ID_user = ?';
-    conexion.query(sql,[name_user, last_name, user_pass, code_user],function(err,resul){
+    let sql = 'Update data_user set name_user=? , last_name= ?, user_pass= ? where ID_user = ?';
+    conexion.query(sql,[name_user, last_name, pass_encrip, code_user],function(err,resul){
         if(err){
             console.log(err);
         }else{

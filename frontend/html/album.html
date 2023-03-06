@@ -17,11 +17,13 @@
     <header>
         <a href="#"><img src="../multimedia/Logo_black.png" alt="hola mundo"></a>
     </header>   
-    <form action="" method="post" id="formartist">
+    <form action="" method="post" id="formAlbum">
         <h3>Sube tu Album</h3>
         <input type="text" placeholder="Nombre del Album" id="name_album">
-        <input type="text" placeholder="Tipo" id="tipe">                  
-        <input type="text" placeholder="ID_artist" id="ID_artist">                  
+        <p>
+            <input type="radio" name="tipe" value="Sencillo" id="sencillo" checked> Sencillo
+            <input type="radio" name="tipe" value="Album" id="album" > Album                                          
+        </p>
         <input type="submit" value="Crear Album" id="submit">                
     </form>  
     <script src="../js/falbum.js"></script>

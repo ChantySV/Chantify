@@ -16,8 +16,20 @@ formlogin.addEventListener("submit", (e) => {
         user_pass:user_pass.value
     })          
     .then(response => { 
-        sessionStorage.setItem('Token', response.data.token);     
-        location.href = "./mainUser.html"                   
+        console.log(response.data);
+        sessionStorage.setItem('Token', response.data.token);  
+        if (!response.data.link) {
+            location.href = "./mainUser.html"
+        } else {
+            location.href = response.data.link 
+        }
+        
+        // if (response.data.artist) {
+        //     location.href = "./mainArtist.html"
+        // } else {
+        //     location.href = "./mainUser.html"
+        // }   
+        // location.href = response.data.link                   
     })             
     .catch(err => console.log(err));
 })                
