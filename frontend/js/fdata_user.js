@@ -5,29 +5,17 @@ const on = (element, event, selector, handler) => {
         }
     });
 } 
-formcreate.addEventListener("submit", (e) => {
+updateUser.addEventListener("submit", (e) => {
     e.preventDefault()
-    axios.post('http://localhost:3000/profile/n', { 
-        name_user:name_user.value,
-            last_name:last_name.value,
-            mail:mail.value,
-            user_pass:user_pass.value
-    })          
-    .then(response => { console.log(response.data)
-        alert('Felicidades Creaste una Cuenta')
-        location.href = "./login.html"
-    })             
-    .catch(err => console.log(err));
+    fetch('http://localhost:3000/profile/s',{method: "PUT",
+                    headers: {"Content-type":"application/json"},
+                    body: JSON.stringify({
+                        name_user:name_user.value,
+                        last_name:last_name.value,
+                        user_pass:user_pass.value 
+                    })
+            })
+.then(response => response.json())        
+.then(() => location.reload ())     
 });
-// updateUser.addEventListener("submit", (e) => {
-//     e.preventDefault()
-//     axios.post('http://localhost:3000/profile/n', { 
-//         name_user:name_user.value,
-//         last_name:last_name.value,
-//         user_pass:user_pass.value                    
-//     })          
-//     .then(response => { console.log(response.data)
-//         alert('Se actualizaron tus datos')
-//     })             
-//     .catch(err => console.log(err));
-// });
+    

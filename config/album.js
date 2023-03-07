@@ -19,13 +19,17 @@ route.get('/',(req, res) => {
 });
 
 
-route.get('/:code_album',(req, res) => { 
-    let sql = "SELECT * FROM album where ID_album = ?"
-    conexion.query(sql,[req.params.code_album], (err, resul) => {
+route.get('/albums',(req, res) => { 
+    let sql = "SELECT * FROM album where ID_artist = ?"
+    conexion.query(sql, global.ID_ARTIST, (err, resul) => {
         if(err) {
             console.log("Error: "+ err.message);
             throw err
         }else{
+            resul.forEach(dato => {
+                let date = new Date(dato.realese)
+                dato.realese = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate()
+            });
             res.json(resul)                      
         }
     });
@@ -39,7 +43,7 @@ route.post('/', (req, res) => {
     let sql = 'call palbum (?, ?, ?, ?)';
     conexion.query(sql, [code_album, name_album, tipe, global.ID_ARTIST], function(err,resul){
         if(err){
-            console.log(err.message);
+            console.log(err);
         }else{
             res.json(resul);
             console.log('Positiva, se añadio');

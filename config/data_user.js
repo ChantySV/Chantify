@@ -94,7 +94,7 @@ route.put('/s',async(req,res) => {
 
     let code_user = global.ID_USER;
     let name_user = req.body.name_user;
-    let last_name = req.body.last_name;    
+    let last_name = req.body.last_name;           
 
     let sql = 'Update data_user set name_user=? , last_name= ?, user_pass= ? where ID_user = ?';
     conexion.query(sql,[name_user, last_name, pass_encrip, code_user],function(err,resul){
