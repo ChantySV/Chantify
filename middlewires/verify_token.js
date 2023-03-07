@@ -10,8 +10,7 @@ const verifyToken = (req, res, next) =>{
     } else {        
     jwt.verify(token, JWT_SECRET, (err) => {
         if(err) {
-            console.log("Error: Token invalido");            
-            throw err
+            res.redirect('https://www.google.com');
         }else{                                
             next()
         }

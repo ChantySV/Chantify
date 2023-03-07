@@ -84,4 +84,9 @@ contenedorCanciones.addEventListener('click', (event) => {
         .catch(err => console.log(err));
     }
   });
-  
+// Controlador de eventos click para el anclaje
+document.getElementById('cerrar-sesion').addEventListener('click', function(event) {
+    sessionStorage.removeItem('Token');
+    event.preventDefault();    
+    window.location.href = '../html/main/index.html';
+  });
