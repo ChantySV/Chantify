@@ -31,17 +31,19 @@ route.get('/',(req, res) => {
     });
 });
 
-// route.get('/:code_song',(req, res) => { 
-//     let sql = "SELECT * FROM album where ID_song = ?"
-//     conexion.query(sql,[req.params.code_song], (err, resul) => {
-//         if(err) {
-//             console.log("Error: "+ err.message);
-//             throw err
-//         }else{
-//             res.json(resul)                      
-//         }
-//     });
-// });
+route.get('/like',(req, res) => { 
+    
+    let sql = "SELECT ID_playlist FROM playlist where ID_user = ? and name_playlist = 'Tus me gusta'"
+
+    conexion.query(sql, [global.ID_USER], (err, resul) => {
+        if(err) {
+            console.log("Error: "+ err.message);
+            throw err
+        }else{
+            res.json(resul)                                 
+        }
+    });
+});
 
 route.post('/song', upload.single('song'), (req, res) => {   
        const song = req.file

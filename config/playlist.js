@@ -58,23 +58,6 @@ route.get('/playlistUser',(req, res) => {
         }
     });
 });
-route.get('/tusMeGusta',(req, res) => { 
-
-    
-    let sql = "SELECT ID_playlist FROM playlist where ID_user = ? and name_playlist = 'Tus me gusta'"
-
-    conexion.query(sql, global.ID_USER , (err, resul) => {
-        if(err) {
-            console.log("Error: "+ err.message);
-            throw err
-        }else{
-            res.json(resul) 
-            console.log(global.ID_USER);
-            console.log('Hola estoy aqui');                     
-        }
-    });
-});
-
 
 route.post('/', (req, res) => {    
     sql = 'Select IFNULL(MAX(ID_playlist), 0)+1 valor from playlist;'
