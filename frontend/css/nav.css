@@ -19,17 +19,17 @@ header{
     padding: 10px;	
 	justify-content: space-around;
 }
-#searchForm{	
+#search{	
 	border: none;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	margin: 0 auto;	
 }
-#searchForm input{
+#search input{
 	width: 300px;
 }
-#searchForm button{
+#search button{
 	height: 40px;	
 }
 nav{

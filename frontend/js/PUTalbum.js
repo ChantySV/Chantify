@@ -32,7 +32,7 @@ const cargaAlbum = (datos)=>{
 // e.preventDefault()
 axios.get('http://localhost:3000/album/albums')          
     .then(response =>  cargaAlbum(response.data))             
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
 
 on(contenedorAlbum, 'click', '.btnAñadirAlbum', e => {
     const fila = e.target.closest('tr');    

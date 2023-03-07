@@ -12,7 +12,7 @@ formArtist.addEventListener("submit", (e) => {
         nickname:nickname.value,        
     })          
     .then(response => { console.log(response.data)
-        alert('Felicidades ahora eres artista :D')
+        alert('Felicidades ahora eres un artista :D')
         location.href = "./login.html"
     })             
     .catch(err => console.log(err));
