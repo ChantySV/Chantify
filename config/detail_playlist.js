@@ -60,10 +60,21 @@ route.put('/:code_playlist', (req,res) => {
     });
 });
 
+route.delete('/:code_playlist/xd/:code_song', (req, res)=>{      
+    let sql = 'Delete from detail_playlist where ID_playlist = ? and ID_song = ?';
+    
+    conexion.query(sql, [req.params.code_playlist, req.params.code_song], (err, resul) => {
+        if (err) {
+            console.log('Error al Eliminar', err);            
+        } else {
+            res.json(resul)
+            console.log('Se elimino');
+        }
+    });
+});
 
 
-
-route.delete('/:code_detail', (req, res)=>{
+route.delete('/general/:code_detail', (req, res)=>{
 
     let code_detail = req.params.code_detail;    
 

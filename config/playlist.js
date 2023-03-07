@@ -63,13 +63,13 @@ route.get('/playlistUser',(req, res) => {
 route.post('/', (req, res) => {    
     sql = 'Select IFNULL(MAX(ID_playlist), 0)+1 valor from playlist;'
     let codigo = 0
-    conexion.query(sql, async (err, dato) =>{
+    conexion.query(sql, (err, dato) =>{
         if (err) {
             console.log("Error");
             return -1;
         } else {            
             codigo=dato[0].valor            
-            console.log('Codigo maximo', codigo);
+            //console.log('Codigo maximo', codigo);
             let data = {
                 ID_playlist: codigo,
                 name_playlist:req.body.name_playlist,
@@ -111,11 +111,11 @@ route.put('/:code_playlist', (req,res) => {
 });
 
 route.delete('/:code_playlist', (req, res)=>{  
-
-    let sql = 'Delete from detail_playlist';
+    let code_playlist = req.params.code_playlist
+    let sql = 'Delete from detail_playlist where ID_playlist = ?';
     conexion.query(sql, [code_playlist], (err, resul) => {
         if (err) {
-            console.log('Error al Eliminar la playlist', sql);            
+            console.log('Error al Eliminar la playlist', err);            
         } else {
             res.json(resul)
             console.log('Se elimino');
@@ -125,9 +125,8 @@ route.delete('/:code_playlist', (req, res)=>{
             let sql = 'Delete from playlist where ID_playlist = ?';
             conexion.query(sql, [code_playlist], (err, resul) => {
                 if (err) {
-                    console.log('Error al Eliminar', sql);            
-                } else {
-                    res.json(resul)
+                    console.log('Error al Eliminar', err);            
+                } else {                                        
                     console.log('Se elimino');
                 }
             });

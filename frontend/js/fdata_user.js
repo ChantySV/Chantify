@@ -1,5 +1,3 @@
-const url = 'http://localhost:3000/profile' 
-
 const on = (element, event, selector, handler) => {
     element.addEventListener(event, e =>{
         if(e.target.closest(selector)){
@@ -7,33 +5,29 @@ const on = (element, event, selector, handler) => {
         }
     });
 } 
-
 formcreate.addEventListener("submit", (e) => {
     e.preventDefault()
-    fetch(url, {
-        method: "POST",
-        headers: {"Content-type":"application/json"},
-        body: JSON.stringify({        
-            name_user:name_user.value,
+    axios.post('http://localhost:3000/profile/n', { 
+        name_user:name_user.value,
             last_name:last_name.value,
             mail:mail.value,
             user_pass:user_pass.value
-        })
-    })
-    .then(response => response.json())
-    .then(data => { console.log(data);})
+    })          
+    .then(response => { console.log(response.data)
+        alert('Felicidades Creaste una Cuenta')
+        location.href = "./login.html"
+    })             
+    .catch(err => console.log(err));
 });
-updateUser.addEventListener("submit", (e) => {
-    e.preventDefault()
-    fetch('http://localhost:3000/profile/s', {
-        method: "PUT",
-        headers: {"Content-type":"application/json"},
-        body: JSON.stringify({        
-            name_user:name_user.value,
-            last_name:last_name.value,            
-            user_pass:user_pass.value
-        })
-    })
-    .then(response => response.json())
-    .then(data => { console.log(data);})
-});
+// updateUser.addEventListener("submit", (e) => {
+//     e.preventDefault()
+//     axios.post('http://localhost:3000/profile/n', { 
+//         name_user:name_user.value,
+//         last_name:last_name.value,
+//         user_pass:user_pass.value                    
+//     })          
+//     .then(response => { console.log(response.data)
+//         alert('Se actualizaron tus datos')
+//     })             
+//     .catch(err => console.log(err));
+// });

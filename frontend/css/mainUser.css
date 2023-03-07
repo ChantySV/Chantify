@@ -27,9 +27,11 @@ a{
     padding: 10px;
    
 }
+.table-playlist{
+    background: #000;
+}
 #canciones{
-    display: flex;
-    flex-direction: column;    
+    /* border: #000 1px solid; */
 }
 #canciones a{
     font-size: 20px;
@@ -51,6 +53,10 @@ a{
 .texto {
 	padding:4px;
 	background:#000;
+}
+.izquierda{
+    background: #000;
+    border: none;
 }
 
 /* Muestra de canciones */

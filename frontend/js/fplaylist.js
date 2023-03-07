@@ -5,8 +5,8 @@ formplaylist.addEventListener("submit", (e) => {
         name_playlist:name_playlist.value,        
     })          
     .then(response => { console.log(response.data)
-        alert('Felicidades Se creo la lista', name_playlist.value)
-        location.href = "./mainUser.html"   
+        alert('Se creo la lista', name_playlist.value)
+        location.href = "./mainArtist.html"   
     })             
     .catch(err => console.log(err));
 })    

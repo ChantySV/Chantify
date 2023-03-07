@@ -37,7 +37,7 @@ route.get('/:code_user',(req, res) => {
     });
 });
 
-route.post('/', (req, res) => {    
+route.post('/n', (req, res) => {    
     sql = 'Select IFNULL(MAX(ID_user), 0)+1 valor from data_user;'
     let codigo = 0
 
@@ -63,8 +63,25 @@ route.post('/', (req, res) => {
                     console.log(err.mensaje);
                     res.json({mensaje:'Error datos'});  
                 } else {
+                    let sql1 = 'Select IFNULL(MAX(ID_playlist), 0)+1 valor from playlist;'
+                    conexion.query(sql1, (err, dato) =>{
+                    let codigoP = dato[0].valor  
+                        let play = {
+                            ID_playlist: codigoP,
+                            name_playlist: 'Tus me gusta',
+                            ID_user: codigo
+                        }
+                        let sql2 = 'Insert into playlist set ?';
+                        conexion.query(sql2 ,play, function(err,resul){
+                            if(err){
+                                console.log(err.message);                                                                
+                            }else{
+                                
+                                console.log('Positiva, se adiciono la playlist');
+                            }
+                        });
                     console.log('Se adiciono');
-                    res.json(resul)
+                    res.json(resul)})
                 }                    
             })            
         }
