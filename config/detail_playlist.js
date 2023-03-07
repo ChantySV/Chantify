@@ -5,23 +5,9 @@ const cors = require('cors');
 
 const route = express.Router()
 
-
-route.get('/',(req, res) => { 
-    let sql = "SELECT * FROM detail_playlist"
-    conexion.query(sql, (err, resul) => {
-        if(err) {
-            console.log("Error: "+ err.message);
-            throw err
-        }else{
-            res.json(resul)                      
-        }
-    });
-});
-
-
-route.get('/detail_playlist',(req, res) => { 
-    let sql = "SELECT info_song.name_song, info_song.URL, album.name_album, detail_playlist.ID_playlist FROM info_song inner join album on info_song.ID_album = album.ID_album inner join detail_playlist on info_song.ID_song = detail_playlist.ID_song  where ID_playlist  = ?"
-    conexion.query(sql, global.ID_USER, (err, resul) => {
+route.get('/:code',(req, res) => { 
+    let sql = "SELECT info_song.name_song, info_song.URL, album.name_album, artist.nickname, detail_playlist.ID_playlist FROM info_song inner join album on info_song.ID_album = album.ID_album inner join detail_playlist on info_song.ID_song = detail_playlist.ID_song inner join artist on artist.ID_artist = album.ID_artist where detail_playlist.ID_playlist  = ?;"
+    conexion.query(sql, req.params.code, (err, resul) => {
         if(err) {
             console.log("Error: "+ err.message);
             throw err
@@ -81,7 +67,7 @@ route.delete('/:code_detail', (req, res)=>{
 
     let code_detail = req.params.code_detail;    
 
-    let sql = 'Delete from detail_playlist where ID_song = ?';
+    let sql = 'Delete from detail_playlist where ID_playlist = ?';
     conexion.query(sql, [code_detail], (err, resul) => {
         if (err) {
             console.log('Error al Eliminar', sql);            

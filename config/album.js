@@ -34,11 +34,10 @@ route.get('/:code_album',(req, res) => {
 route.post('/', (req, res) => {   
     let code_album = 0
     let name_album = req.body.name_album;
-    let tipe = req.body.tipe;
-    let ID_artist = req.body.ID_artist;              
+    let tipe = req.body.tipe;           
 
     let sql = 'call palbum (?, ?, ?, ?)';
-    conexion.query(sql, [code_album, name_album, tipe, ID_artist], function(err,resul){
+    conexion.query(sql, [code_album, name_album, tipe, global.ID_ARTIST], function(err,resul){
         if(err){
             console.log(err.message);
         }else{

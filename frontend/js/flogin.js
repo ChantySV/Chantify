@@ -22,15 +22,7 @@ formlogin.addEventListener("submit", (e) => {
             location.href = "./mainUser.html"
         } else {
             location.href = response.data.link 
-        }
-        
-        // if (response.data.artist) {
-        //     location.href = "./mainArtist.html"
-        // } else {
-        //     location.href = "./mainUser.html"
-        // }   
-        // location.href = response.data.link                   
+        }                
     })             
     .catch(err => console.log(err));
 })                
-// alert(sessionStorage.token)

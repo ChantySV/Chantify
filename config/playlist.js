@@ -19,7 +19,7 @@ route.get('/',(req, res) => {
 });
 
 route.get('/playlistUser',(req, res) => { 
-    let sql = "select name_playlist from playlist where ID_user = ?"
+    let sql = "select name_playlist, ID_playlist from playlist where ID_user = ?"
     conexion.query(sql, global.ID_USER, (err, resul) => {
         if(err) {
             console.log("Error: "+ err.message);
@@ -30,6 +30,7 @@ route.get('/playlistUser',(req, res) => {
         }
     });
 });
+
 
 route.get('/:code_playlist',(req, res) => { 
     let sql = "SELECT * FROM playlist where ID_playlist = ?"
@@ -43,6 +44,7 @@ route.get('/:code_playlist',(req, res) => {
         }
     });
 });
+
 //GET PLAYLIST DEL USUARIO
 route.get('/playlistUser',(req, res) => { 
     let sql = "SELECT ID_playlist, name_playlist FROM playlist where ID_user = ?"
