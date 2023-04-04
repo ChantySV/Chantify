@@ -1,7 +1,18 @@
 const {JWT_SECRET} = require ('../routes/parametros')
-
 const jwt = require ('jsonwebtoken');
 
+
+// const verifyToken = (req, res, next) => {
+//   let token = req.get("Authorization");
+
+//   jwt.verify(token, JWT_SECRET, function (err, datos) {
+//     if (err) {
+//       res.json("Token no encontrado ... Ingrese un token porfavor :,v");
+//     } else {
+//       next();
+//     }
+//   });
+// };
 const verifyToken = (req, res, next) =>{
     let token = req.header('Authorization')
     if (!token) {
@@ -10,8 +21,9 @@ const verifyToken = (req, res, next) =>{
     } else {        
     jwt.verify(token, JWT_SECRET, (err) => {
         if(err) {
-            res.redirect('https://www.google.com');
-        }else{                                
+            res.redirect('Token error');
+        }else{  
+            req.token = token                              
             next()
         }
     });

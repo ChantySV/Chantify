@@ -17,29 +17,28 @@ route.post("/", async function (req, res) {
   };
 
   let sql = "Select user_pass from data_user where mail = ?";
-  conexion.query(sql, req.body.mail, (err, resul) => {
+  conexion.query(sql, req.body.mail, (err, resul) => { //Se hace la verificacion de que el mail sea existente en la base de datos
     if (err) {
-      res.json("ERROR");
       console.log('Error correo');
+      res.json("Correo Incorrecto");
     } 
     else {
-      conexion.query(sql, req.body.mail, async function (err, resul) {
+      conexion.query(sql, req.body.mail, async function (err, resul) {//Se hace la verificacion de que el mail no este en blanco
         if (resul.length == 0) {
-            res.json('Datos incorrectos')
-            console.log('Datos incorrectos');
+            res.json('El correo no puede estar vacio')
+            //console.log('El correo no puede estar vacio');
         } else {
             let passBD = resul[0].user_pass
-            if (await encrypt.compare(req.body.user_pass, passBD)){                                                                    
-                  jwt.sign(data, JWT_SECRET, (err, token) => {
+            if (await encrypt.compare(req.body.user_pass, passBD)){//Se verifica que la contraseña coincida con la encriptada en la base de datos                                                         
+                  jwt.sign(data, JWT_SECRET, (err, token) => { //Se asigna un token para que posteriormente sera una medida permitará navegar a través de la pagina
                     if (err) {
                         console.log('Error token');   
-                        console.log(err)   
-                        res.json(token);                      
+                        console.log(err)                                                 
                     } else {                                
-                      let sql2 = "select ID_user from data_user where mail = ?"                       
+                      let sql2 = "select ID_user from data_user where mail = ?" //Se asigna un variable global una vez que se haya hecho todos los pasos anteriores dando acceso a la pagina                   
                       conexion.query(sql2, data.mail, (err, resul)=>{
                         global.ID_USER = resul[0].ID_user                     
-                        let sql3 = "select ID_artist from artist where ID_user = ?"
+                        let sql3 = "select ID_artist from artist where ID_user = ?" //Y este paso redirige a una pagina segun el usuario y los permisos que este tiene, y despues de esto se muestra una interfaz diferente
                         conexion.query(sql3,  global.ID_USER, (err, resul2)=>{
                           let link = {                        
                             link: './mainArtist.html',

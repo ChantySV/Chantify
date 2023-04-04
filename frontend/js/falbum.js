@@ -1,3 +1,8 @@
+let token = sessionStorage.getItem('Token')
+const config = {
+  headers: { Authorization: `Bearer ${token}` }
+};
+
 const on = (element, event, selector, handler) => {
     element.addEventListener(event, e =>{
         if(e.target.closest(selector)){
@@ -11,7 +16,7 @@ formAlbum.addEventListener("submit", (e) => {
     var radios = document.getElementsByName("tipe");
     var selected = Array.from(radios).find(radio => radio.checked);
     alert(selected.value);
-    axios.post('http://localhost:3000/album', { 
+    axios.post('http://localhost:3000/album', config,  { 
         name_album:name_album.value,
         tipe: selected.value
     })          

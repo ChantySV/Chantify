@@ -1,6 +1,12 @@
-//MOSTRAR PLAYLIST
+//GET TOKEN
+
 const contenedorPlaylist = document.getElementById('canciones')
 let resultadoPlaylist = ''
+let token = sessionStorage.getItem('Token')
+const config = {
+  headers: { Authorization: `Bearer ${token}` }
+};
+
 const cargaPlaylist = (datos)=>{
     datos.forEach(dato => {        
         resultadoPlaylist +=         
@@ -19,8 +25,8 @@ const cargaPlaylist = (datos)=>{
     contenedorPlaylist.innerHTML = resultadoPlaylist
 }
 
-axios.get('http://localhost:3000/playlist/playlistUser') 
-    .then(response =>  cargaPlaylist(response.data))     
+axios.get('http://localhost:3000/playlist/playlistUser', config)
+    .then(response => cargaPlaylist(response.data))     
     .catch(err => console.log(err)); 
 
 

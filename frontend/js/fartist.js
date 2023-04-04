@@ -1,3 +1,8 @@
+let token = sessionStorage.getItem('Token')
+const config = {
+  headers: { Authorization: `Bearer ${token}` }
+};
+
 const on = (element, event, selector, handler) => {
     element.addEventListener(event, e =>{
         if(e.target.closest(selector)){
@@ -8,7 +13,7 @@ const on = (element, event, selector, handler) => {
 
 formArtist.addEventListener("submit", (e) => {
     e.preventDefault()
-    axios.post('http://localhost:3000/artist', { 
+    axios.post('http://localhost:3000/artist', config,{ 
         nickname:nickname.value,        
     })          
     .then(response => { console.log(response.data)

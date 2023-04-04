@@ -1,7 +1,5 @@
 const contenedorCanciones = document.getElementById('contenedor')
 let resultadoCanciones = ''
-
-const token = sessionStorage.getItem('Token')
 const on = (element, event, selector, handler) => {
     element.addEventListener(event, e =>{
         if(e.target.closest(selector)){

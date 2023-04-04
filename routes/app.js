@@ -12,7 +12,7 @@ const profile = require('../config/data_user')
 app.use('/profile', profile)
 
 const artist = require('../config/artist')
-app.use('/artist', artist)
+app.use('/artist',  artist)
 
 const album = require('../config/album')
 app.use('/album', album)
@@ -28,9 +28,6 @@ app.use('/detail', detail)
 
 const login = require('../config/login')
 app.use('/login', login)
-
-const grafic = require('../config/grafic')
-app.use('/grafic', grafic)
 
 const puerto = 3000
 app.listen(puerto, function() {
